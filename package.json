@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "gh-pages": "^1.0.0",
     "react-scripts": "1.0.14"
   },
   "dependencies": {
@@ -10,10 +11,14 @@
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.0.0"
   },
+  "homepage": "https://clemchansf.github.io/board",
+  "deploy": "npm run build&&gh-pages -d build",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }
