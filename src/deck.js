@@ -8,27 +8,36 @@ class Deck extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      id: props.id,
-    }
+    let id = parseInt(props.id)
+    let cards = props.childrenMap[id]
+    this.state = {id,cards}
   }
 
-  shouldComponentUpdate() {
-    return true
+  isSame = (arrA, arrB) => {
+    return arrA.length === arrB.length &&
+           arrA.every((v, i) => arrB[i] === v)
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // memoization check
+    let updateStatus = !this.isSame(nextProps.childrenMap[nextState.id], nextState.cards)
+    if (updateStatus) {
+      this.setState({cards: nextProps.childrenMap[nextState.id]}) // update cache in state.cards
+    }
+    return updateStatus
   }
 
   render() {
 
-    let {id, childrenMap, handleAdd, handleLeft, handleRight, ...restProps} = this.props
+    let {id, childrenMap, handleAdd, handleLeft, handleRight} = this.props
     let length = Object.keys(childrenMap).length
-
 
     console.log(`deck render id:${id} length:${length}`)
     let children = childrenMap[id].map((child, innerIdx) => {
 
       const generateID = (nav) => {
         let offset = innerIdx
-        console.log("offset nav", offset, nav)
+        console.log(`offset:${offset}, arrow:${nav} > ${child}`)
         return JSON.stringify({id, offset, nav})
       }
 
@@ -38,27 +47,10 @@ class Deck extends Component {
 
       const combineIds = () => `${id},${innerIdx}`
 
-      const memoizeLeftClick = (e) => {
-          handleLeft(e)
-      }
-      const memoizeRightClick = (e) => {
-          handleRight(e)
-      }
       const needLeftNavigator = (x,y) => {
-        // console.log(`     idx: ${x}, needLeftNavigator
-        //                 typeof id ${x}: ${typeof x}
-        //                 typeof length ${y}: ${typeof y}
-        //                 lenght ${y},
-        //                 condition(${x} > (${y}): ${parseInt(x) > y}`)
           return x > y
       }
       const needRightNavigator = (x, y) => {
-          // console.log(`    idx: ${x}, needRightNavigator
-          //                 typeof ${x}: ${typeof x}
-          //                 typeof ${y}: ${typeof y}
-          //                 lenght ${y},
-          //                 (length-1): ${y-1},
-          //                 condition(${x} < (${y} - 1)): ${parseInt(x) < (y -1)}`)
           return parseInt(x, 10) < (y -1)
       }
 
