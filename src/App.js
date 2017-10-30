@@ -1,18 +1,13 @@
 import React, {Component} from 'react'
 import result from './data'
+import Deck from './deck'
 
-import {heightStyle,cardStyle,alignStyle} from './styles'
-import {LeftArrow,RightArrow} from './arrows'
-import {Header} from './header'
-
-let element = null
-
-class Columns extends Component {
+class Board extends Component {
 
   constructor (props) {
     super(props)
 
-    // convert children array into a map width index being the corresponding key
+    // flattern array into an object, using index as the key
     let tempMap = props.data.reduce((accumulator, item, index) => {
       accumulator[index] = [...item.children]
       return accumulator
@@ -20,11 +15,12 @@ class Columns extends Component {
 
     this.state = {
       childrenMap: tempMap,
-      data: props.data
+      data: props.data // keep a reference to the original
     }
   }
 
   addItem = (idx, inpTxt, prevChildrenMap) => {
+    console.log(idx, inpTxt, prevChildrenMap )
     let childrenMap = {...prevChildrenMap}
     if (prevChildrenMap[idx].findIndex((item) => item === inpTxt) === -1) {
       childrenMap[idx] = [...childrenMap[idx], inpTxt]
@@ -32,15 +28,7 @@ class Columns extends Component {
     return childrenMap
   }
 
-  handleAdd = (inp) => {
-    let inputText = prompt ("please enter a new entry!")
-    if (inputText) {
-      let childrenMap = this.addItem(inp.idx, inputText, this.state.childrenMap)
-      this.setState({childrenMap})
-    }
-  }
-
-  delItem = (x, y, prevChildrenMap) => {
+  deleteItem = (x, y, prevChildrenMap) => {
 
      let childrenMap = {...prevChildrenMap}
      let newChildren = prevChildrenMap[x].filter((item,idx) => {
@@ -50,59 +38,55 @@ class Columns extends Component {
      return childrenMap
   }
 
-
-  handleLeft = (e) => {
-    e.preventDefault()
-    let {key, offset} = this.toObject(e.target.id)
-    let targetedInput = this.state.childrenMap[key][offset]
-    let childrenMap = this.addItem(key - 1, targetedInput, this.delItem(key, offset, this.state.childrenMap))
-    this.setState({childrenMap})
+  handleAdd = (id) => {
+    let inputText = prompt ("please enter a new entry!")
+    if (inputText) {
+      let childrenMap = this.addItem(id,
+                                    inputText,
+                                    this.state.childrenMap)
+      this.setState({childrenMap})
+    }
   }
 
-  handleRight= (e) => {
-    e.preventDefault()
-    console.log("id ", e.target.id)
-    let {key, offset} = this.toObject(e.target.id)
-    let targetedInput = this.state.childrenMap[key][offset]
-    let childrenMap = this.addItem(key + 1, targetedInput, this.delItem(key, offset, this.state.childrenMap))
+  handleClick = (idObject, func) => {
+    let {id, offset} = this.toObject(idObject)
+    let targetedInput = this.state.childrenMap[id][offset]
+    let childrenMap = this.addItem(
+                                   func(parseInt(id), 1),
+                                   targetedInput,
+                                   this.deleteItem(id,
+                                                   offset,
+                                                   this.state.childrenMap))
     this.setState({childrenMap})
+  }
+  handleLeft = (e) => {
+      this.handleClick(e.target.id, (x,y) => x - y)
+  }
+  handleRight = (e) => {
+      this.handleClick(e.target.id, (x,y) => (x) + (y))
   }
 
   toObject = jsonString => JSON.parse(jsonString)
 
   render() {
+    const handleAddClick = (inp) => {
+        this.handleAdd(inp)
+    }
 
-    let columns = Object.keys(this.state.childrenMap).map((key, idx) => {
+    let board = Object.keys(this.state.childrenMap).map((key, idx) => {
 
-      let length = Object.keys(this.state.childrenMap).length
-
-      let children = this.state.childrenMap[key].map((child, innerIdx) => {
-
-        function generateID(nav) {
-          let key = idx, offset = innerIdx
-          console.log("key offset nav", key, offset, nav)
-          return JSON.stringify({key, offset, nav})
-        }
-
-        return <div key={`${idx},${innerIdx}`}
-                ref={(el) => element = el}
-                style={Object.assign({}, cardStyle, heightStyle, alignStyle)}
-                >
-                  {(idx > 0) ? <LeftArrow id={generateID('left')} onClick={this.handleLeft}/> : null}
-                  {child}
-                  {(idx < length - 1) ? <RightArrow id={generateID("right")} onClick={this.handleRight}/> : null}
-                </div>
-      })
-
-      return <div key={idx} className="col-md-3">
-        <Header {...this.state.data[idx]}/>
-        {children}
-        <button onClick={this.handleAdd.bind(this,{idx})} className="btn btn-primary">+add</button>
-      </div>
+      return <Deck
+                key={key}
+                id={key}
+                handleAdd={handleAddClick}
+                handleLeft={this.handleLeft}
+                handleRight={this.handleRight}
+                {...this.state} />
     })
+
     return (
       <div className="row">
-        {columns}
+        {board}
       </div>
     )
   }
@@ -110,7 +94,7 @@ class Columns extends Component {
 
 const App = () => {
     return <div className="fluid-container" style={{margin: 25}}>
-      <Columns data={result}/>
+      <Board data={result}/>
     </div>
 }
 
