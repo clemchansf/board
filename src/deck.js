@@ -74,7 +74,7 @@ class Deck extends Component {
               </Card>
     })
 
-    return <div key={id} className="col-md-3">
+    return <div key={id} className="col-sm-3">
       <Header {...this.props.data[parseInt(id, 0)]}/>
       {children}
       <button id={id} onClick={(e) => {
