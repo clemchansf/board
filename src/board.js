@@ -40,7 +40,9 @@ class Board extends Component {
     let inputText = prompt ("please enter a new entry!")
     if (inputText) {
       let childrenMap = this.addItem(id,
-                                    inputText,
+                                    ((inputText.length > 12)
+                                    ? `${inputText.substr(0,8)}${" ;)"}`
+                                    : inputText),
                                     this.state.childrenMap)
       this.setState({childrenMap})
     }
