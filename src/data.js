@@ -1,27 +1,27 @@
 const data = [
   {
     id: 1,
-    name: "William",
+    name: "Open",
     style: { backgroundColor: "#8e6e95" },
-    tasks: ["child 1.1", "child 1.2"]
+    tasks: ["Task 1.1", "Task 1.2"]
   },
   {
     id: 2,
-    name: "Connie",
+    name: "In Progress",
     style: { backgroundColor: "#39a59c" },
-    tasks: ["child 2.1", "child 2.2"]
+    tasks: ["Task 2.1", "Task 2.2"]
   },
   {
     id: 3,
-    name: "Billy",
+    name: "In Review",
     style: { backgroundColor: "#344759" },
-    tasks: ["child 3.1", "child 3.2"]
+    tasks: ["Task 3.1", "Task 3.2"]
   },
   {
     id: 4,
-    name: "Sue",
+    name: "Done",
     style: { backgroundColor: "#e8741e" },
-    tasks: ["child 4.1", "child 4.2"]
+    tasks: ["Task 4.1", "Task 4.2"]
   }
 ]
 export default data
