@@ -4,6 +4,7 @@ import Board from "./components/Board"
 import Deck from "./components/Deck"
 import CreateCard from "./components/CreateCard"
 import data from "./data"
+import "./assets/css/main.css"
 
 function Main(props) {
   const persistedList = localStorage.getItem("boardappList")
