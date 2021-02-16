@@ -1,4 +1,4 @@
-# Repo Clem's board ReactJS prototype
+# Repo Clem's board ReactJS prototype, renaming to main
 
 - [Demo](https://clemchansf.github.io/board)
 
