@@ -1,17 +1,20 @@
 {
+  "homepage": "https://clemchansf.github.io/board",
   "name": "Render",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "gh-pages": "^1.0.0",
-    "react-scripts": "1.0.14"
+    "gh-pages": "^1.2.0",
+    "react-scripts": "^4.0.2"
   },
   "dependencies": {
+    "css-loader": "^5.0.2",
     "react": "^16.0.0",
     "react-bootstrap": "^0.31.5",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "sass-loader": "^11.0.1",
+    "style-loader": "^2.0.0"
   },
-  "homepage": "https://clemchansf.github.io/board",
   "deploy": "npm run build&&gh-pages -d build",
   "scripts": {
     "start": "react-scripts start",
@@ -19,5 +22,17 @@
     "test": "react-scripts test --env=jsdom",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
