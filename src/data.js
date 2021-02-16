@@ -2,7 +2,7 @@ const data = [
   {
     id: 1,
     name: "Open",
-    style: { backgroundColor: "#8e6e95" },
+    style: { backgroundColor: "#344759" },
     tasks: ["Task 1.1", "Task 1.2"]
   },
   {
@@ -14,7 +14,7 @@ const data = [
   {
     id: 3,
     name: "In Review",
-    style: { backgroundColor: "#344759" },
+    style: { backgroundColor: "#8e6e95" },
     tasks: ["Task 3.1", "Task 3.2"]
   },
   {

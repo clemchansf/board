@@ -30,13 +30,17 @@ function Card(props) {
       {props.head ? (
         <span> </span>
       ) : (
-        <span onClick={handleClickLeft}>{"◄"}</span>
+        <span style={{ color: props.color }} onClick={handleClickLeft}>
+          {"◄"}
+        </span>
       )}
       <p>{props.task}</p>
       {props.tail ? (
         <span> </span>
       ) : (
-        <span onClick={handleClickRight}>{"►"}</span>
+        <span style={{ color: props.color }} onClick={handleClickRight}>
+          {"►"}
+        </span>
       )}
     </div>
   )

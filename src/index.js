@@ -24,6 +24,7 @@ function Main(props) {
             id={itemI}
             tasks={item.tasks}
             setList={setList}
+            color={item.style.backgroundColor}
           />
         </div>
       ))}

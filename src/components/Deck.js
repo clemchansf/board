@@ -11,6 +11,7 @@ function Deck(props) {
       taskI={taskI}
       id={props.id}
       setList={props.setList}
+      color={props.color}
     />
   ))
 }
