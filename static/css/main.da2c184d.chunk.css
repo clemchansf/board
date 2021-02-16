@@ -1,0 +1,2 @@
+.board{display:flex;justify-content:space-between}.container{align-items:center;flex:1 1;text-align:center}.container .card{border-radius:.75rem;margin:5px;padding:2px;display:flex;flex-direction:row;justify-content:space-between;align-items:center}.container .card p{margin:auto}.container .header{color:#fff;border-radius:.75rem;margin:5px;padding:5px}.create-item form{display:flex;flex-direction:row;margin-top:1.5rem}.create-item button{display:flex;justify-content:center;margin:auto;text-align:center}
+/*# sourceMappingURL=main.da2c184d.chunk.css.map */
