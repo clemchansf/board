@@ -7,7 +7,7 @@ function Card(props) {
       // clone prev list
       let newList = JSON.parse(JSON.stringify(prev))
       // sub from current by splicing out itself
-      let movedItem = newList[props.id].tasks.splice(props.itemI, 1)
+      let movedItem = newList[props.id].tasks.splice(props.taskI, 1)
       // add spliced out item to the left [id - 1] item
       newList[props.id - 1].tasks.push(movedItem)
       return newList
@@ -19,8 +19,8 @@ function Card(props) {
       // clone prev list
       let newList = JSON.parse(JSON.stringify(prev))
       // sub from current by splicing out itself
-      let movedItem = newList[props.id].tasks.splice(props.itemI, 1)
-      // add spliced out item to the left [id - 1] item
+      let movedItem = newList[props.id].tasks.splice(props.taskI, 1)
+      // add spliced out item to the right [id + 1] item
       newList[props.id + 1].tasks.push(movedItem)
       return newList
     })
@@ -32,7 +32,7 @@ function Card(props) {
       ) : (
         <span onClick={handleClickLeft}>{"◄"}</span>
       )}
-      {props.task}
+      <p>{props.task}</p>
       {props.tail ? (
         <span> </span>
       ) : (
