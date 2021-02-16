@@ -1,0 +1,52 @@
+body {
+  width: 100%;
+}
+
+.board {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container {
+  /* border: 1px solid red; */
+  align-items: center;
+  flex: 1;
+  /* min-height: 200px; */
+  text-align: center;
+}
+
+.container .card {
+  /* border: none; */
+  border-radius: 0.75rem;
+  margin: 5px;
+  padding: 2px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container .card p {
+  margin: auto;
+}
+
+.container .header {
+  color: white;
+  border-radius: 0.75rem;
+  margin: 5px;
+  padding: 5px;
+}
+
+.create-item form {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1.5rem;
+}
+
+.create-item button {
+  display: flex;
+  justify-content: center;
+  /* max-height: 2rem; */
+  margin: auto;
+  text-align: center;
+}
