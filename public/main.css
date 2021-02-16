@@ -1,0 +1,32 @@
+body {
+  width: 100%;
+}
+
+.board {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container {
+  /* border: 1px solid red; */
+  align-items: center;
+  flex: 1;
+  /* min-height: 200px; */
+  text-align: center;
+}
+
+.container .card {
+  /* border: none; */
+  border-radius: 0.75rem;
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.container .header {
+  color: white;
+  border-radius: 0.75rem;
+  margin: 5px;
+  padding: 5px;
+}
