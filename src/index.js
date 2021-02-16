@@ -2,10 +2,15 @@ import React, { useEffect, useState } from "react"
 import ReactDOM from "react-dom"
 import Board from "./components/Board"
 import Deck from "./components/Deck"
+import CreateCard from "./components/CreateCard"
 import data from "./data"
 
 function Main(props) {
-  const [list, setList] = useState(data)
+  const persistedList = localStorage.getItem("boardappList")
+  const [list, setList] = useState(
+    (persistedList && JSON.parse(persistedList)) || data
+  )
+
   useEffect(() => {
     document.title = `${props.title}`
     window.scrollTo(0, 0)
@@ -26,6 +31,7 @@ function Main(props) {
             setList={setList}
             color={item.style.backgroundColor}
           />
+          {item.name !== "Open" ? "" : <CreateCard setList={setList} />}
         </div>
       ))}
     </Board>

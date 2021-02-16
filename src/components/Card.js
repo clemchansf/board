@@ -10,6 +10,7 @@ function Card(props) {
       let movedItem = newList[props.id].tasks.splice(props.taskI, 1)
       // add spliced out item to the left [id - 1] item
       newList[props.id - 1].tasks.push(movedItem)
+      localStorage.setItem("boardappList", JSON.stringify(newList))
       return newList
     })
   }
@@ -22,6 +23,7 @@ function Card(props) {
       let movedItem = newList[props.id].tasks.splice(props.taskI, 1)
       // add spliced out item to the right [id + 1] item
       newList[props.id + 1].tasks.push(movedItem)
+      localStorage.setItem("boardappList", JSON.stringify(newList))
       return newList
     })
   }
