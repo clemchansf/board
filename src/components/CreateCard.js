@@ -23,7 +23,7 @@ function CreateCard(props) {
   }
   return (
     <div className="create-item">
-      <form onSubmit={handleAdd}>
+      <form className="blurred" onSubmit={handleAdd}>
         <input
           ref={itemInput}
           onChange={e => setNewItem(e.target.value)}

@@ -28,7 +28,7 @@ function Card(props) {
     })
   }
   return (
-    <div className="card">
+    <div className="card blurred">
       {props.head ? (
         <span> </span>
       ) : (
