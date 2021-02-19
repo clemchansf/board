@@ -6,11 +6,10 @@ function Deck(props) {
     <Card
       head={props.head}
       tail={props.tail}
-      key={task}
+      key={`${task}${taskI}`}
       task={task}
       taskI={taskI}
       id={props.id}
-      setList={props.setList}
       color={props.color}
     />
   ))

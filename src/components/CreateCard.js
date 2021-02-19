@@ -1,6 +1,10 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect, useRef, useContext } from "react"
+
+import DispatchContext from "../DispatchContext"
 
 function CreateCard(props) {
+  const { dispatch } = useContext(DispatchContext)
+
   const [newItem, setNewItem] = useState("")
   const itemInput = useRef(null)
   useEffect(() => {
@@ -12,12 +16,8 @@ function CreateCard(props) {
 
     if (!Boolean(newItem)) return
 
-    props.setList(prev => {
-      let newList = JSON.parse(JSON.stringify(prev))
-      newList[0].tasks.push(newItem)
-      localStorage.setItem("boardappList", JSON.stringify(newList))
-      return newList
-    })
+    dispatch({ type: "create", card: { content: newItem } })
+
     setNewItem("")
     itemInput.current.focus()
   }
