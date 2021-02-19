@@ -1,30 +1,22 @@
-import React from "react"
+import React, { useContext } from "react"
+
+import DispatchContext from "../DispatchContext"
 
 function Card(props) {
+  const { dispatch } = useContext(DispatchContext)
+
   function handleClickLeft(e) {
     e.preventDefault()
-    props.setList(prev => {
-      // clone prev list
-      let newList = JSON.parse(JSON.stringify(prev))
-      // sub from current by splicing out itself
-      let movedItem = newList[props.id].tasks.splice(props.taskI, 1)
-      // add spliced out item to the left [id - 1] item
-      newList[props.id - 1].tasks.push(movedItem)
-      localStorage.setItem("boardappList", JSON.stringify(newList))
-      return newList
+    dispatch({
+      type: "moveLeft",
+      card: { deckI: props.id, taskI: props.taskI }
     })
   }
   function handleClickRight(e) {
     e.preventDefault()
-    props.setList(prev => {
-      // clone prev list
-      let newList = JSON.parse(JSON.stringify(prev))
-      // sub from current by splicing out itself
-      let movedItem = newList[props.id].tasks.splice(props.taskI, 1)
-      // add spliced out item to the right [id + 1] item
-      newList[props.id + 1].tasks.push(movedItem)
-      localStorage.setItem("boardappList", JSON.stringify(newList))
-      return newList
+    dispatch({
+      type: "moveRight",
+      card: { deckI: props.id, taskI: props.taskI }
     })
   }
   return (
