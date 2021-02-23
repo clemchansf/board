@@ -49,3 +49,101 @@
   margin: auto;
   text-align: center;
 }
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.82);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* block from user initially */
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.33s ease-out;
+  transform: scale(1.2);
+}
+
+.overlay--visible {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+.blurred {
+  filter: blur(4px);
+}
+
+.overlay-inner {
+  text-align: center;
+  max-width: 700px;
+}
+
+.end-message {
+  font-size: 1.5rem;
+  margin-top: 0;
+}
+
+.form-group {
+  position: relative;
+}
+
+.form-group input,
+.form-group textarea {
+  position: relative;
+  z-index: 2;
+}
+
+textarea.tall-textarea {
+  height: 160px;
+}
+
+@media (min-width: 768px) {
+  textarea.tall-textarea {
+    height: 120px;
+  }
+}
+
+.control {
+  display: flex;
+  justify-content: space-between;
+}
+.control button {
+  border-radius: 5px;
+  border: none;
+  margin: 2px;
+  color: white;
+}
+
+.control .canc {
+  background-color: rgb(164, 164, 164);
+}
+.control .canc:hover {
+  background-color: #463c3c;
+}
+.control .canc:focus {
+  background-color: #181717;
+}
+
+.control .del {
+  background-color: rgb(226, 2, 2);
+}
+.control .del:hover {
+  background-color: #b60303;
+}
+.control .del:focus {
+  background-color: #810202;
+}
+
+.control .save {
+  background-color: blue;
+}
+.control .save:hover {
+  background-color: rgb(4, 4, 165);
+}
+.control .save:focus {
+  background-color: navy;
+}
