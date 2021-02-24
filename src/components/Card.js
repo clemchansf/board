@@ -29,7 +29,9 @@ function Card(props) {
     })
   }
   return (
-    <div className={"card" + (state.editing ? " blurred" : "")}>
+    <div
+      className={"card" + (state.editing || state.prompting ? " blurred" : "")}
+    >
       {props.head ? (
         <span> </span>
       ) : (
