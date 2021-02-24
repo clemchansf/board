@@ -25,7 +25,10 @@ function CreateCard(props) {
   }
   return (
     <div className="create-item">
-      <form className={state.editing ? " blurred" : ""} onSubmit={handleAdd}>
+      <form
+        className={state.editing || state.prompting ? " blurred" : ""}
+        onSubmit={handleAdd}
+      >
         <input
           ref={itemInput}
           onChange={e => setNewItem(e.target.value)}

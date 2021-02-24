@@ -111,20 +111,25 @@ textarea.tall-textarea {
   display: flex;
   justify-content: space-between;
 }
-.control button {
+.control button,
+.cancel-prompt,
+.prompt {
   border-radius: 5px;
   border: none;
   margin: 2px;
   color: white;
 }
 
-.control .canc {
+.control .canc,
+.cancel-prompt {
   background-color: rgb(164, 164, 164);
 }
-.control .canc:hover {
+.control .canc:hover,
+.cancel-prompt:hover {
   background-color: #463c3c;
 }
-.control .canc:focus {
+.control .canc:focus,
+.cancel-prompt:focus {
   background-color: #181717;
 }
 
@@ -138,12 +143,32 @@ textarea.tall-textarea {
   background-color: #810202;
 }
 
-.control .save {
+.control .save,
+.prompt {
   background-color: blue;
 }
-.control .save:hover {
+.control .save:hover,
+.prompt:hover {
   background-color: rgb(4, 4, 165);
 }
-.control .save:focus {
+.control .save:focus,
+.prompt:focus {
   background-color: navy;
+}
+
+.reset {
+  flex: 1;
+  position: fixed;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  margin: 5px;
+  padding: 5px;
+  color: white;
+  background-color: darkslategray;
+}
+.reset:hover {
+  background-color: rgb(22, 37, 37);
+}
+.reset:focus {
+  background-color: rgb(10, 17, 17);
 }

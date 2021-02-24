@@ -2,9 +2,11 @@ import React, { useEffect } from "react"
 import ReactDOM from "react-dom"
 import { useImmerReducer } from "use-immer"
 import Board from "./components/Board"
-import Deck from "./components/Deck"
 import CreateCard from "./components/CreateCard"
+import Deck from "./components/Deck"
 import Overlay from "./components/Overlay"
+import Prompt from "./components/Prompt"
+import Reset from "./components/Reset"
 import data from "./data"
 import "./assets/css/main.css"
 
@@ -16,7 +18,9 @@ function Main(props) {
   const initialState = {
     editCard: { deckI: 0, taskI: 0 },
     editing: false,
-    list: (persistedList && JSON.parse(persistedList)) || data
+    list: (persistedList && JSON.parse(persistedList)) || data,
+    prompting: false,
+    promptMessage: " "
   }
 
   function reducer(draft, action) {
@@ -24,8 +28,29 @@ function Main(props) {
     let movedItem
 
     switch (action.type) {
-      case "cancelEdit":
-        draft.editing = false
+      case "cancel":
+        debugger
+        if (action.command === "edit") {
+          draft.editing = false
+          return
+        }
+        if (action.command === "resetAll") {
+          draft.prompting = false
+          /*
+              don't reset message with space, it will make the
+              promptMessage disappears first creating a sudden 
+              jumping motions of the prompt buttons
+           */
+          // draft.promptMessage = " ",
+          return
+        }
+        break
+
+      case "continue":
+        if (action.command === "resetAll") {
+          draft.list = data
+          draft.prompting = false
+        }
         return
 
       case "create":
@@ -41,6 +66,12 @@ function Main(props) {
         draft.editing = true
         draft.editCard.deckI = deckI
         draft.editCard.taskI = taskI
+        return
+
+      case "reset":
+        draft.prompting = true
+        draft.promptMessage = "Reset will clear all, press continue to proceed."
+        draft.command = "resetAll"
         return
 
       case "update":
@@ -81,7 +112,10 @@ function Main(props) {
           {state.list.map((item, itemI) => (
             <div key={item.id} className="container">
               <div
-                className={"header" + (state.editing ? " blurred" : "")}
+                className={
+                  "header" +
+                  (state.editing || state.prompting ? " blurred" : "")
+                }
                 style={item.style}
               >
                 {item.name}
@@ -96,8 +130,10 @@ function Main(props) {
               {item.name !== "Open" ? "" : <CreateCard />}
             </div>
           ))}
+          <Reset />
         </Board>
         <Overlay />
+        <Prompt />
       </DispatchContext.Provider>
     </StateContext.Provider>
   )
