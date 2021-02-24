@@ -1,9 +1,11 @@
 import React, { useContext } from "react"
 
 import DispatchContext from "../DispatchContext"
+import StateContext from "../StateContext"
 
 function Card(props) {
   const { dispatch } = useContext(DispatchContext)
+  const { state } = useContext(StateContext)
 
   function handleClickLeft(e) {
     e.preventDefault()
@@ -19,8 +21,15 @@ function Card(props) {
       card: { deckI: props.id, taskI: props.taskI }
     })
   }
+  function handleEdit(e) {
+    e.preventDefault()
+    dispatch({
+      type: "edit",
+      card: { deckI: props.id, taskI: props.taskI }
+    })
+  }
   return (
-    <div className="card">
+    <div className={"card" + (state.editing ? " blurred" : "")}>
       {props.head ? (
         <span> </span>
       ) : (
@@ -28,7 +37,7 @@ function Card(props) {
           {"◄"}
         </span>
       )}
-      <p>{props.task}</p>
+      <p onClick={handleEdit}>{props.task}</p>
       {props.tail ? (
         <span> </span>
       ) : (

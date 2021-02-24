@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef, useContext } from "react"
 
 import DispatchContext from "../DispatchContext"
+import StateContext from "../StateContext"
 
 function CreateCard(props) {
   const { dispatch } = useContext(DispatchContext)
+  const { state } = useContext(StateContext)
 
   const [newItem, setNewItem] = useState("")
   const itemInput = useRef(null)
@@ -23,7 +25,7 @@ function CreateCard(props) {
   }
   return (
     <div className="create-item">
-      <form onSubmit={handleAdd}>
+      <form className={state.editing ? " blurred" : ""} onSubmit={handleAdd}>
         <input
           ref={itemInput}
           onChange={e => setNewItem(e.target.value)}
