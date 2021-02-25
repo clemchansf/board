@@ -7,11 +7,12 @@ function Overlay() {
   const [content, setContent] = useState("")
   const { dispatch } = useContext(DispatchContext)
   const { state } = useContext(StateContext)
+  const newContent =
+    state.list[state.editCard.deckI].tasks[state.editCard.taskI]
 
   useEffect(() => {
-    const { deckI, taskI } = state.editCard
-    setContent(state.list[deckI].tasks[taskI])
-  }, [state.editCard])
+    setContent(newContent)
+  }, [newContent])
 
   function handleCancel(e) {
     e.preventDefault()
