@@ -10,6 +10,7 @@ function Overlay() {
   const newContent =
     state.list[state.editCard.deckI].tasks[state.editCard.taskI]
 
+  /* fix issues #17 */
   useEffect(() => {
     setContent(newContent)
   }, [newContent])
