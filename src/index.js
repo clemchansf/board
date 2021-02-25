@@ -29,7 +29,6 @@ function Main(props) {
 
     switch (action.type) {
       case "cancel":
-        debugger
         if (action.command === "edit") {
           draft.editing = false
           return
