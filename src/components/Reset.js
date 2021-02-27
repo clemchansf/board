@@ -5,6 +5,10 @@ import StateContext from "../StateContext"
 function Reset() {
   const { dispatch } = useContext(DispatchContext)
   const { state } = useContext(StateContext)
+  const taskCount = state.list.reduce(
+    (taskCnt, item) => item.tasks.length + taskCnt,
+    0
+  )
 
   function handleResetBoard(e) {
     e.preventDefault()
@@ -12,7 +16,8 @@ function Reset() {
   }
   return (
     <button
-      onClick={handleResetBoard}
+      onClick={taskCount > 0 ? handleResetBoard : null}
+      style={taskCount > 0 ? {} : { backgroundColor: "silver" }}
       className={
         "btn reset" + (state.editing || state.prompting ? " blurred" : "")
       }
