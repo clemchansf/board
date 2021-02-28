@@ -16,8 +16,8 @@ function Reset() {
   }
   return (
     <button
-      onClick={taskCount > 0 ? handleResetBoard : null}
-      style={taskCount > 0 ? {} : { backgroundColor: "silver" }}
+      onClick={handleResetBoard}
+      disabled={taskCount === 0}
       className={
         "btn reset" + (state.editing || state.prompting ? " blurred" : "")
       }
